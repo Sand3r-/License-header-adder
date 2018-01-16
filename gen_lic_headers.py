@@ -52,8 +52,10 @@ def get_name_and_extension(path):
     return valid, name, extension
 
 def print_help():
-    print("Usage 1:\npython " + sys.argv[0] + " <file_name_1> <filename_2> ... <filename_n>\n")
-    print("Usage 2 (not supported yet):\npython "  + sys.argv[0] + " <file_name> -m <description>\n")
+    print("Usage 1:\npython " + sys.argv[0] + " <file_name_1> <filename_2>"
+        +" ... <filename_n>\n")
+    print("Usage 2 (not supported yet):\npython "  + sys.argv[0] + 
+        " <file_name> -m <description>\n")
 
     print("The first command adds license headers with filename,")
     print("author, year and an empty description to each valid file")
@@ -66,9 +68,12 @@ def print_help():
     global supported_extensions
     print(supported_extensions)
 
-def get_file_list(): # A. k. a. parse the cmd line arguments
+def get_file_list(): # parse the cmd line arguments
     arg_num = len(sys.argv)
-    if arg_num < 2:
+    help_argument = (arg_num > 1) and (sys.argv[1] == "--help" 
+                                    or sys.argv[1] == '-h')
+    should_print_help = arg_num < 2 or help_argument
+    if should_print_help:
         print_help()
         exit(-1)
 
